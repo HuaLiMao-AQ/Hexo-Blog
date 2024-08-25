@@ -1,0 +1,58 @@
+name: Deploy hexo blog
+
+on:
+  push:
+    branches:
+    - post
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20.x]
+
+    steps:
+      - uses: actions/checkout@v4
+        with: 
+          ref: 'main'
+
+      - name: Sync Post
+        uses: actions/checkout@v4
+        with: 
+          ref: 'post'
+          path: 'source/_posts'
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Configuration environment
+        env:
+          GITHUBDEPLOY: ${{ secrets.GITHUBDEPLOY }}
+        run: |
+          sudo timedatectl set-timezone "Asia/Shanghai"
+          mkdir -p ~/.ssh/
+          echo "$GITHUBDEPLOY" | tr -d '\r' > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          git config --global user.name "HualiMoa-AQ"
+          git config --global user.email "hualimao_aq@163.com"
+
+      - name: Set Domain
+        env:
+          DOMAIN: ${{ vars.DOMAIN }}
+        run:
+          echo $DOMAIN >> themes/redefine/source/CNAME
+
+      - name: Install dependencies
+        run: |
+          sudo apt install nasm
+          npm i -g hexo-cli
+          npm ci
+
+      - name: Deploy hexo
+        run: |
+          hexo clean
+          hexo d -g
