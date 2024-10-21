@@ -30,7 +30,7 @@ jobs:
         uses: actions/checkout@v4
         with: 
           ref: 'post'
-          path: $POST_PATH
+          path: $GITHUB_WORKSPACE/$POST_PATH
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
@@ -63,12 +63,14 @@ jobs:
 
       - name: Add Post
         run: |
-          ls $POST_PATH | grep -e "md" | awk '/.md/ {gsub(".md",""); print $1}' >> $POST_PATH/post_list.txt
+          ls $GITHUB_WORKSPACE/$POST_PATH | grep -e "md" | awk '/.md/ {gsub(".md",""); print $1}' >> $GITHUB_WORKSPACE/$POST_PATH/post_list.txt
+          cat $GITHUB_WORKSPACE/$POST_PATH/post_list.txt
           while read post
           do
             hexo new post $post
-            cp -f $POST_PATH/$post.md source/_posts
-          done < $POST_PATH/post_list.txt
+            echo $post
+            cp -f $GITHUB_WORKSPACE/$POST_PATH/$post.md source/_posts
+          done < $GITHUB_WORKSPACE/$POST_PATH/post_list.txt
 
       - name: Deploy hexo
         run: |
