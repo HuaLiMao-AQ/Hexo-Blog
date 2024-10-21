@@ -53,7 +53,7 @@ jobs:
         env:
           DOMAIN: ${{ vars.DOMAIN }}
         run:
-          echo $DOMAIN >> themes/redefine/source/CNAME
+          echo $DOMAIN >> source/CNAME
 
       - name: Install dependencies
         run: |
