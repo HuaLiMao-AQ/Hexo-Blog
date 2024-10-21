@@ -63,7 +63,7 @@ jobs:
 
       - name: Add Post
         run: |
-          ls ~/Project/Posts | grep -e "md" | awk '/.md/ {gsub(".md",""); print $1}' >> $POST_PATH/post_list.txt
+          ls $POST_PATH | grep -e "md" | awk '/.md/ {gsub(".md",""); print $1}' >> $POST_PATH/post_list.txt
           while read post
           do
             hexo new post $post
