@@ -5,6 +5,9 @@ on:
     branches:
     - post
 
+env:
+  POST_PATH: Hexo-Blog/Post
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -17,11 +20,17 @@ jobs:
         with: 
           ref: 'main'
 
+      - name: Initiallize
+        run: |
+          sudo apt update
+          sudo apt upgrade -y
+          mkdir -p $POST_PATH
+
       - name: Sync Post
         uses: actions/checkout@v4
         with: 
           ref: 'post'
-          path: 'source/_posts'
+          path: $POST_PATH
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
@@ -51,6 +60,15 @@ jobs:
           sudo apt install nasm
           npm i -g hexo-cli
           npm ci
+
+      - name: Add Post
+        run: |
+          ls ~/Project/Posts | grep -e "md" | awk '/.md/ {gsub(".md",""); print $1}' >> $POST_PATH/post_list.txt
+          while read post
+          do
+            hexo new post $post
+            cp -f $POST_PATH/$post.md source/_posts
+          done < $POST_PATH/post_list.txt
 
       - name: Deploy hexo
         run: |
