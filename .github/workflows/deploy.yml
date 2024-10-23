@@ -22,9 +22,8 @@ jobs:
   
       - name: Initiallize
         run: |
-          sudo apt update
-          sudo apt upgrade -y
           git submodule update --init --recursive
+          ls source/_posts
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
