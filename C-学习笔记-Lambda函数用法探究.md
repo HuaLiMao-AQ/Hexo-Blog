@@ -3,7 +3,8 @@ title: C++学习笔记-Lambda函数用法探究
 date: 2024-09-20 18:37:40
 tags: C++学习笔记
 categories: 学习笔记
-cover: https://github.com/HuaLiMao-AQ/picx-images-hosting/raw/master/20240920/OIP-C.4g4gg0g798.webp
+thumbnail: "https://github.com/HuaLiMao-AQ/picx-images-hosting/raw/master/20240920/OIP-C.4g4gg0g798.webp"
+mathjax: ture
 ---
 
 # 1.Lambda函数介绍

@@ -3,7 +3,8 @@ title: 折腾日记-Github pages + Hexo 的个人博客
 date: 2024-08-25 17:24:58
 tags: 折腾日记
 categories: 折腾日记
-cover: https://github.com/HuaLiMao-AQ/picx-images-hosting/raw/master/v2-6c3e3b3687634640e8b8223f66aab0d0_720w.86tm13rrmt.webp
+thumbnail: "https://github.com/HuaLiMao-AQ/picx-images-hosting/raw/master/v2-6c3e3b3687634640e8b8223f66aab0d0_720w.86tm13rrmt.webp"
+mathjax: ture
 ---
 
 ## 本文以Linux为演示环境
