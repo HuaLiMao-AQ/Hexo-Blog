@@ -50,9 +50,9 @@ global:
   fonts:
     # Chinese fonts
     chinese: 
-      enable: false # Whether to enable custom chinese fonts
-      family:  # Font family
-      url:  # Font URL to CSS file
+      enable: true # Whether to enable custom chinese fonts
+      family: Misans # Font family
+      url: https://font.sec.miui.com/font/css?family=MiSans:400,700:MiSans # Font URL to CSS file
     # English fonts
     english: 
       enable: false # Whether to enable custom english fonts
@@ -470,7 +470,7 @@ developer:
 # DEVELOPER MODE <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
 mathjax:
-  tags: none               # or 'ams' or 'all'
+  tags: all               # or 'ams' or 'all'
   single_dollars: true     # enable single dollar signs as in-line math delimiters
   cjk_width: 0.9           # relative CJK char width
   normal_width: 0.6        # relative normal (monospace) width
